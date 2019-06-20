@@ -36,9 +36,14 @@ colorApi({
     });
 });
 
-function colorApi(options = {}) {
+function colorApi(options = {
+    width: null,
+    height: null,
+    count: null,
+    seed: null
+}) {
     let baseURL = 'https://api.noopschallenge.com/hexbot';
-    const optionKeys = Object.getOwnPropertyNames(options);
+    const optionKeys = Object.getOwnPropertyNames(options).filter(v => !!options[v]);
     if (optionKeys.length > 0) {
         baseURL += '?';
     }
