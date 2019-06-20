@@ -4,9 +4,10 @@ html, body {
     margin: 0px;
     padding: 0px;
 }
-
-body {
+.container {
     display: grid;
+    width: 100%;
+    height: 80%;
 }
 
 .cell {

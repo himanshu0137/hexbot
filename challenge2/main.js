@@ -2,22 +2,26 @@ function randomNumberGenerator(max, min = 0) {
     return Math.round(Math.random() * (max - min)) + min;
 }
 
-const width = randomNumberGenerator(20, 5);
+const width = randomNumberGenerator(30, 10);
 const height = randomNumberGenerator(20, 5);
+const containerElement = document.getElementById('container');
 
 colorApi({
     width: width,
     height: height,
     count: width * height
 }).then((colors) => {
-    document.body.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
-    document.body.style.gridTemplateRows = `repeat(${height}, 1fr)`;
+    while (containerElement.hasChildNodes()) {
+        containerElement.removeChild(containerElement.firstChild);
+    }
+    containerElement.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
+    containerElement.style.gridTemplateRows = `repeat(${height}, 1fr)`;
     const elements = [];
     for (let i = 0; i < width * height; i++) {
         const divElement = document.createElement('div');
         divElement.classList.add('cell');
         elements.push(divElement);
-        document.body.appendChild(divElement);
+        containerElement.appendChild(divElement);
     }
     const unassignedColors = [];
     colors.forEach((color) => {
